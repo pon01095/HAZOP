@@ -17,9 +17,9 @@ class Config:
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
     # 파일 경로 설정
-    BASE_DIRECTORY = os.getenv('BASE_DIRECTORY', 'C:/Users/B/Desktop/HAZOP 자동화/GPT4o')
-    IMAGE_DIRECTORY = os.getenv('IMAGE_DIRECTORY', 'C:/Users/B/Desktop/HAZOP 자동화/코드/이미지')
-    DEFAULT_IMAGE = os.getenv('DEFAULT_IMAGE', 'C:/Users/B/Desktop/HAZOP 자동화/HAZOP_BIOGAS_preprocess_cut.png')
+    BASE_DIRECTORY = os.getenv('BASE_DIRECTORY', '')
+    IMAGE_DIRECTORY = os.getenv('IMAGE_DIRECTORY', '')
+    DEFAULT_IMAGE = os.getenv('DEFAULT_IMAGE', '')
 
     # 공정 개요
     HAZOP_OBJECT = os.getenv('HAZOP_OBJECT',

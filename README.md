@@ -1,6 +1,6 @@
 # HAZOP 자동화 시스템
 
-OpenAI GPT-4를 활용한 P&ID 다이어그램 기반 HAZOP 분석 자동화 시스템입니다.
+OpenAI GPT-4를 활용한 P&ID 다이어그램 기반 HAZOP 분석 자동화 시스템
 
 ## 🚀 시작하기
 
@@ -12,13 +12,10 @@ pip install -r requirements.txt
 ```
 
 #### API 키 설정
-1. `.env` 파일에서 `OPENAI_API_KEY`를 실제 API 키로 수정하세요:
+1. `.env` 파일에서 `OPENAI_API_KEY`를 실제 API 키로 수정:
 ```env
-OPENAI_API_KEY=여기에_실제_API_키를_입력하세요
+OPENAI_API_KEY=여기에_실제_API_키를_입력
 ```
-
-⚠️ **보안 주의사항**: `.env` 파일은 버전 관리 시스템(Git)에 포함하지 마세요!
-
 ### 2. 시스템 구조
 
 ```
@@ -37,7 +34,7 @@ OPENAI_API_KEY=여기에_실제_API_키를_입력하세요
 
 ### 3. 실행 순서
 
-HAZOP 분석은 다음 순서로 실행해야 합니다:
+HAZOP 분석은 다음 순서로 실행:
 
 1. **Agent1**: P&ID 다이어그램에서 공정 요소 식별
    ```bash
@@ -101,24 +98,24 @@ HAZOP 분석은 다음 순서로 실행해야 합니다:
 
 ### 5. 설정 파일 (.env) 사용법
 
-`.env` 파일에서 다음 설정을 변경할 수 있습니다:
+`.env` 파일에서 다음 설정을 변경:
 
 ```env
 # OpenAI API 설정
 OPENAI_API_KEY=your_api_key_here
 
 # 파일 경로 설정
-BASE_DIRECTORY=C:/Users/B/Desktop/HAZOP 자동화/GPT4o
-IMAGE_DIRECTORY=C:/Users/B/Desktop/HAZOP 자동화/코드/이미지
-DEFAULT_IMAGE=C:/Users/B/Desktop/HAZOP 자동화/HAZOP_BIOGAS_preprocess_cut.png
+BASE_DIRECTORY=""
+IMAGE_DIRECTORY=""
+DEFAULT_IMAGE=""
 
 # 공정 개요
-HAZOP_OBJECT=검토대상은 바이오가스 고질화 시스템 공정으로...
+""
 ```
 
 ### 6. 출력 파일
 
-각 Agent는 다음 파일들을 생성합니다:
+각 Agent는 다음 파일들을 생성:
 
 - **Agent1**: `공정요소.txt/json` - 공정 구성요소 목록
 - **Agent2**: `Agent2.txt/json` - 노드별 분리 결과
@@ -138,8 +135,9 @@ HAZOP_OBJECT=검토대상은 바이오가스 고질화 시스템 공정으로...
 - **파일 경로 오류**: `.env` 파일의 경로 설정 확인
 
 #### 지원
-시스템 사용 중 문제가 발생하면 다음을 확인하세요:
+시스템 사용 중 문제가 발생하면 다음을 확인:
 1. 모든 필수 라이브러리가 설치되었는지
 2. API 키가 올바르게 설정되었는지
 3. 파일 경로가 올바른지
 4. 이전 Agent의 출력 파일이 존재하는지
+5. .env 파일 생성
