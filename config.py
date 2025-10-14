@@ -37,6 +37,13 @@ class Config:
     MAX_TOKENS = 16000  # 응답 토큰 증가 (GPT-5는 추론 토큰 + 출력 토큰 포함)
     API_TIMEOUT = 300  # API 타임아웃 5분 (GPT-5는 더 오래 걸림)
 
+    # 이탈 시나리오 분석 설정 (Agent 4 개선)
+    CSV_SCENARIOS_PATH = os.getenv('CSV_SCENARIOS_PATH',
+        'C:/Users/B/Desktop/HAZOP 자동화/참고문헌/수정 엑셀/Heat_Transfer_Equipment.csv')  # Failure scenarios 데이터베이스
+    DEVIATION_OUTPUT_DIR = os.getenv('DEVIATION_OUTPUT_DIR',
+        os.path.join(BASE_DIRECTORY, '이탈시나리오'))  # 이탈 시나리오 출력 디렉토리
+    DEVIATION_IMAGE_PATH = os.getenv('DEVIATION_IMAGE_PATH', DEFAULT_IMAGE)  # Agent 이미지
+
     @classmethod
     def validate(cls):
         """설정 검증 및 초기화"""
@@ -59,6 +66,14 @@ class Config:
                 print(f"출력 디렉토리 생성: {cls.BASE_DIRECTORY}")
             except Exception as e:
                 raise Exception(f"BASE_DIRECTORY 생성 실패: {e}")
+
+        # DEVIATION_OUTPUT_DIR가 없으면 생성
+        if not os.path.exists(cls.DEVIATION_OUTPUT_DIR):
+            try:
+                os.makedirs(cls.DEVIATION_OUTPUT_DIR)
+                print(f"이탈 시나리오 출력 디렉토리 생성: {cls.DEVIATION_OUTPUT_DIR}")
+            except Exception as e:
+                raise Exception(f"DEVIATION_OUTPUT_DIR 생성 실패: {e}")
 
 # 전역 설정 객체
 config = Config()

@@ -69,8 +69,9 @@ HAZOP 분석은 다음 순서로 실행해야 합니다:
    python "GPT4o HAZOP Table (Agent6).py"
    ```
 
-### 4. 주요 변경사항 (보안 개선)
+### 4. 주요 변경사항
 
+#### 보안 개선
 ✅ **적용된 수정사항**:
 - API 키 하드코딩 제거 → 환경변수 사용
 - 불필요한 라이브러리 import 제거
@@ -78,6 +79,25 @@ HAZOP 분석은 다음 순서로 실행해야 합니다:
 - 하드코딩된 파일 경로를 설정 파일로 이동
 - `eval()` 함수를 `ast.literal_eval()`로 대체 (Agent6)
 - 설정 중앙화를 통한 유지보수성 향상
+
+#### Agent 4 품질 개선 (v3) 🆕
+✅ **CSV 데이터베이스 통합**:
+- 전문 failure scenarios 데이터베이스 참고
+- 산업 표준 수준의 deviation 설명 생성
+- 구체적인 원인-현상-결과 구조 작성
+- 장비 태그 및 설계값 포함
+
+✅ **확률 기반 위험도 평가 + 시각화**:
+- 각 deviation의 발생 가능성 1-10 점수 평가
+- Bar plot + Cumulative probability 그래프 자동 생성
+- 고위험 deviation (점수 7 이상) 자동 추출
+- 고해상도 PNG 그래프 (300 DPI)
+
+**개선 예시**:
+- ❌ 기존: "압력 증가 (High Pressure)"
+- ✅ 개선: "BL-1101 블로워 과부하로 토출 압력 0.3→0.5 bar.g 상승. 배관 과압으로 안전밸브 작동 가능" + 발생 가능성 9/10 점
+
+📖 **상세 가이드**: `AGENT4_IMPROVEMENT_GUIDE.md` 참조
 
 ### 5. 설정 파일 (.env) 사용법
 
@@ -100,11 +120,14 @@ HAZOP_OBJECT=검토대상은 바이오가스 고질화 시스템 공정으로...
 
 각 Agent는 다음 파일들을 생성합니다:
 
-- **Agent1**: `공정요소.txt` - 공정 구성요소 목록
-- **Agent2**: `Agent2.txt` - 노드별 분리 결과
-- **Agent3**: `Agent3.txt` - 공정 변수 목록
-- **Agent4**: `Agent4.txt` - 이탈 시나리오
-- **Agent5**: `Agent5.txt` - 안전장치 분석
+- **Agent1**: `공정요소.txt/json` - 공정 구성요소 목록
+- **Agent2**: `Agent2.txt/json` - 노드별 분리 결과
+- **Agent3**: `Agent3.txt/json` - 공정 변수 목록
+- **Agent4**:
+  - `Agent4.txt` - 이탈 시나리오 (텍스트)
+  - `Agent4_nodeX.json` - 이탈 시나리오 (JSON, probability_score 포함)
+  - `Agent4_nodeX_probability_graph.png` - 확률 분석 그래프 🆕
+- **Agent5**: `Agent5.txt/json` - 안전장치 분석
 - **Agent6**: `HAZOP_table.xlsx` - 최종 HAZOP 테이블 (Excel)
 
 ### 7. 문제 해결
